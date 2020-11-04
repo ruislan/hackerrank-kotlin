@@ -1,1 +1,1 @@
-# hackerrank-kotlin
+# hackerrank in kotlin
