@@ -12,8 +12,8 @@ fun pageCount(n: Int, p: Int): Int {
     //    需要从后向前翻动，(n - p) / 2
     // 否则：
     //    需要从前向后翻动， p / 2
-    val x = if (n and 1 == 0) n + 1 else n
-    return if (p <= (x shr 1)) p shr 1 else (x - p) shr 1
+    val mid = n + ((n and 1) xor 1)
+    return if (p <= (mid shr 1)) p shr 1 else (mid - p) shr 1
 }
 
 fun main(args: Array<String>) {
