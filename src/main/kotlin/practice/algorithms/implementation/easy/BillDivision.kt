@@ -1,4 +1,4 @@
-package practice.algorithms.implementation
+package practice.algorithms.implementation.easy
 
 // Complete the bonAppetit function below.
 fun bonAppetit(bill: Array<Int>, k: Int, b: Int): Unit {

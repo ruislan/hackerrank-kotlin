@@ -1,4 +1,4 @@
-package practice.algorithms.implementation
+package practice.algorithms.implementation.easy
 
 import java.util.*
 
