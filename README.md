@@ -4,3 +4,4 @@
 
 ### easy
 * Picking Numbers
+* Sherlock and Squares
