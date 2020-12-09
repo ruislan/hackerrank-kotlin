@@ -5,3 +5,4 @@
 ### easy
 * Picking Numbers
 * Sherlock and Squares
+* Manasa and Stones
