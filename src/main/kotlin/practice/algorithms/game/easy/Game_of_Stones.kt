@@ -13,15 +13,21 @@ fun main(args: Array<String>) {
         // 1+2 = 3,1+3 = 4,1+5 = 6
         // 也就是7会输，那么再用会输的数字重复上述直到n
         // 这样我们就知道第n个数字到底谁赢了
-        // AC
-        val stones = BooleanArray(n + 1)
-        var i = 0
-        while (i <= n) {
-            if (!stones[i] && i + 2 <= n) stones[i + 2] = true
-            if (!stones[i] && i + 3 <= n) stones[i + 3] = true
-            if (!stones[i] && i + 5 <= n) stones[i + 5] = true
-            i += 1
-        }
-        println(if (stones[n]) "First" else "Second")
+        // AC O(n)
+//        val stones = BooleanArray(n + 1)
+//        var i = 0
+//        while (i <= n) {
+//            if (!stones[i] && i + 2 <= n) stones[i + 2] = true
+//            if (!stones[i] && i + 3 <= n) stones[i + 3] = true
+//            if (!stones[i] && i + 5 <= n) stones[i + 5] = true
+//            i += 1
+//        }
+//        println(if (stones[n]) "First" else "Second")
+
+        // 方法2
+        // 通过方法1的结果我们观察到1,7,8,14,15,21,22……
+        // p1都会输，很规律的得到 n mod 7 in [0..1]
+        // AC O(1)
+        println(if (n % 7 in 0..1) "Second" else "First")
     }
 }
