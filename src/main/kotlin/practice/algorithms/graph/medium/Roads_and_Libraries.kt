@@ -1,30 +1,5 @@
 package practice.algorithms.graph.medium
 
-class UnionFind(val n: Int) {
-    val parent = IntArray(n)
-    val sz = IntArray(n) { 1 }
-    var setCount = n
-
-    init {
-        for (i in 0 until n) parent[i] = i
-    }
-
-    fun find(x: Int): Int {
-        if (x != parent[x]) parent[x] = find(parent[x])
-        return parent[x]
-    }
-
-    fun union(x: Int, y: Int): Boolean {
-        val rootX = find(x)
-        val rootY = find(y)
-        if (rootX == rootY) return false
-        parent[rootY] = rootX
-        sz[rootX] += sz[rootY]
-        setCount -= 1
-        return true
-    }
-}
-
 fun main(args: Array<String>) {
     val q = readLine()!!.trim().toInt()
 
