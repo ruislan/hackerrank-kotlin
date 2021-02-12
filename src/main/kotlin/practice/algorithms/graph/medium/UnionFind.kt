@@ -7,6 +7,8 @@ class UnionFind(val n: Int) {
     val sz = IntArray(n) { 1 }
     var setCount = n
 
+    fun checkConnection(x: Int, y: Int): Boolean = find(x) == find(y)
+
     fun find(x: Int): Int {
         if (x != parent[x]) parent[x] = find(parent[x])
         return parent[x]
