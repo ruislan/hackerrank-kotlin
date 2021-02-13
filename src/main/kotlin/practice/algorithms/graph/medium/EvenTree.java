@@ -1,31 +1,20 @@
 package practice.algorithms.graph.medium;
 
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
+// 方法1
+// 本题没有kotlin，使用Java8
+// 其实只要有树的题，一定要将注意子树的概念
+// 也就是将子树看成一个整体，然后树是由多个子树构成
+// 本题的子树要求的就是even就可以剪枝
+// 所以我们要统计每个节点作为子树的根节点有多少节点
+// 这里有个关键点就是在于root=1，也就是说树是从1开始的
+// 那么最后一个子节点自然就是n，所以我们要从最后一个子节点往前计算
+// 否则会形成多次计算
+// 这里的编码技巧可以看到并查集的一点点影子
+// AC
 public class EvenTree {
-
-    static int bfs(int node, HashMap<Integer, ArrayList<Integer>> graph) {
-        ArrayDeque<Integer> deque = new ArrayDeque<>();
-        deque.addLast(node);
-        int member = 1;
-        HashSet<Integer> visited = new HashSet<>();
-        visited.add(1);
-        visited.add(node);
-        while (!deque.isEmpty()) {
-            int father = deque.removeFirst();
-            ArrayList<Integer> children = graph.get(father);
-            if (children != null) {
-                for (Integer child : children) {
-                    if (visited.add(child)) {
-                        member += 1;
-                        deque.addLast(child);
-                    }
-                }
-            }
-        }
-        return member;
-    }
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -36,22 +25,26 @@ public class EvenTree {
         int tNodes = Integer.parseInt(tNodesEdges[0]);
         int tEdges = Integer.parseInt(tNodesEdges[1]);
 
-        HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
+        final int[] parent = new int[tNodes];
+        final int[] sz = new int[tNodes];
+        Arrays.fill(sz, 1);
 
         for (int i = 0; i < tEdges; i++) {
             String[] tFromTo = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-            Integer from = Integer.parseInt(tFromTo[0]);
-            Integer to = Integer.parseInt(tFromTo[1]);
-            graph.putIfAbsent(from, new ArrayList<>());
-            graph.putIfAbsent(to, new ArrayList<>());
-            graph.get(from).add(to);
-            graph.get(to).add(from);
+            int from = Integer.parseInt(tFromTo[0]) - 1;
+            int to = Integer.parseInt(tFromTo[1]) - 1;
+            parent[from] = to;
+        }
+
+        for (int i = tNodes - 1; i >= 0; i--) {
+            sz[parent[i]] += sz[i];
         }
 
         int answer = 0;
-        ArrayList<Integer> children = graph.get(1);
-        for (Integer child : children) {
-            if ((bfs(child, graph) & 1) == 0) answer += 1;
+        for (int i = 1; i < sz.length; i++) {
+            if ((sz[i] & 1) == 0) {
+                answer += 1;
+            }
         }
 
         bufferedWriter.write(String.valueOf(answer));
