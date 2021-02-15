@@ -58,10 +58,31 @@ fun solution2(price: Array<Long>): Int {
     return answer.toInt()
 }
 
+// 方法3
+// 想了一下，方法2能够正确应该是有一定的偶然性
+// 我觉得正确的解法应该是保持已经迭代过的前面的数组有序，
+// 然后用二分查找来找到当前数字的上界（就是刚好相等或者比当前数字大的那个数字）
+// 然后再求出差值，最后保留最小的那个差值即可
+// AC 16/16（嗯，感觉这个才是正确答案，不会有反例，请忽略掉方法2）
+fun solution3(price: Array<Long>): Int {
+    val n = price.size
+    val prices = java.util.TreeSet<Long>()
+    var answer = Long.MAX_VALUE
+    prices.add(price[0])
+    for (i in 1 until n) {
+        val greater = prices.ceiling(price[i])
+        if (greater != null) {
+            answer = Math.min(answer, greater - price[i])
+        }
+        prices.add(price[i])
+    }
+    return answer.toInt()
+}
+
 fun main(args: Array<String>) {
     val n = readLine()!!.trim().toInt()
     val price = readLine()!!.split(" ").map { it.trim().toLong() }.toTypedArray()
-    val result = solution2(price)
+    val result = solution3(price)
 
     println(result)
 }
