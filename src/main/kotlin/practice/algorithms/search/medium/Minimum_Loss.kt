@@ -40,7 +40,8 @@ fun solution1(price: Array<Long>): Int {
 // 我们可以知道倒排之后求相邻两个数字的差值的最小就可以了
 // 这里也是一样的，因为如果数字相隔得越远，差值肯定越大
 // 既然这里一定有一个解，那这个解就在相邻两个数字中
-// AC
+// （不知道有没有一个testcase能够找出反例，我感觉我的这个解不够严谨，总之目前是AC）
+// AC 16/16
 fun solution2(price: Array<Long>): Int {
     val n = price.size
     val prices = mutableListOf<Pair<Int, Long>>()
