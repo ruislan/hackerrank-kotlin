@@ -11,3 +11,4 @@
 ### medium
 
 * Larry's Array 移动总数的奇偶性判断，首先你得明白这符合奇偶性判断
+* Absolute Permutation 这个有点分治的意思
