@@ -24,6 +24,7 @@ import java.util.*
 // 这里就不细写了，4个数字的结果就是a:d消了，b:c消了
 // 5个数字的结果就是a:e消了，b:d消了，剩下c，而c行中剩下的正好是arr[0] xor arr[2] xor arr[4]
 // 我们知道了偶数是0，奇数就是每个偶数索引之间xor即可
+// AC 14/14
 fun sansaXor(arr: Array<Int>): Int {
     val n = arr.size
     if (n < 2) return arr[0]
